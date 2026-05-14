@@ -8,6 +8,7 @@ CONFIG = {'configurable': {'thread_id': 'thread-1'}}
 if 'message_history' not in st.session_state:
     st.session_state['message_history'] = []
 
+
 # loading the conversation history
 for message in st.session_state['message_history']:
     with st.chat_message(message['role']):
@@ -35,25 +36,3 @@ if user_input:
         )
 
     st.session_state['message_history'].append({'role': 'assistant', 'content': ai_message})
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-for message_chunk, metadata in  chatbot.stream(
-    {'messages': [HumanMessage(content="what is Ai")]}, config=CONFIG,
-    stream_mode='messages'
-):
-    if message_chunk.content:
-        print(message_chunk.content, end=' ',flush=True)
